@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastru
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MauRealEstateCompany.Api", "MauRealEstateCompany.Api\MauRealEstateCompany.Api.csproj", "{A8F36767-2534-4D1B-9A09-4E9637BB7354}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MauRealEstateCompany.ApiTest", "MauRealEstateCompany.ApiTest\MauRealEstateCompany.ApiTest.csproj", "{FF1D67E2-C1A0-4829-88FA-E3CFC04BC7C2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +39,10 @@ Global
 		{A8F36767-2534-4D1B-9A09-4E9637BB7354}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A8F36767-2534-4D1B-9A09-4E9637BB7354}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A8F36767-2534-4D1B-9A09-4E9637BB7354}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF1D67E2-C1A0-4829-88FA-E3CFC04BC7C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF1D67E2-C1A0-4829-88FA-E3CFC04BC7C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF1D67E2-C1A0-4829-88FA-E3CFC04BC7C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF1D67E2-C1A0-4829-88FA-E3CFC04BC7C2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -46,6 +52,7 @@ Global
 		{9222120B-D6E5-4467-89C5-176E4A4481A3} = {087CD3F0-B6E9-42D8-BCA7-6DDDD01A8370}
 		{6A899CF1-AA48-4730-ABD0-B47E11DD6893} = {087CD3F0-B6E9-42D8-BCA7-6DDDD01A8370}
 		{A8F36767-2534-4D1B-9A09-4E9637BB7354} = {087CD3F0-B6E9-42D8-BCA7-6DDDD01A8370}
+		{FF1D67E2-C1A0-4829-88FA-E3CFC04BC7C2} = {E5A7FCC4-703A-4282-A4C7-BBD258EC1388}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4F6CF440-C708-4926-8469-46752AF2B1F9}
