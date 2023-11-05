@@ -5,7 +5,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Infrastructure.Repositories.GenericRepository;
 using Domain.Properties;
-using Infrastructure.Repositories;
+using Infrastructure.Repositories.PropertyRepository;
+using Infrastructure.Repositories.GenericRepository.CommandRepository;
+using Infrastructure.Repositories.GenericRepository.QueryRepository;
 
 namespace Infrastructure
 {
@@ -20,8 +22,10 @@ namespace Infrastructure
 
             services.AddScoped<IApplicationDbContext>(provider => provider.GetRequiredService<ApplicationDbContext>());
             
-            services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-            services.AddScoped<IPropertyRepository, PropertyRepository>();
+            services.AddTransient(typeof(ICommandRepository<>), typeof(CommandRepository<>));
+            services.AddTransient(typeof(IQueryRepository<>), typeof(QueryRepository<>));
+            services.AddScoped<IPropertyQueryRepository, PropertyQueryRepository>();
+            services.AddScoped<IPropertyCommandRepository, PropertyCommandRepository>();
 
             return services;
         }

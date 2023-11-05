@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MauRealEstateCompany.Api.Controllers
 {
-    [Authorize]
+    // [Authorize]
     public class PropertyController : ApiControllerBase
     {
         private readonly ILogger<PropertyController> _logger;

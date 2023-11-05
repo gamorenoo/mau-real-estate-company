@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Properties
 {
-    public interface IPropertyRepository
+    public interface IPropertyQueryRepository
     {
         /// <summary>
         /// Get All Properties
@@ -18,18 +18,6 @@ namespace Domain.Properties
         /// Get Properties by Id
         /// </summary>
         /// <returns></returns>
-        Task<Property> GetByIdAsync(int id);
-
-        /// <summary>
-        /// Get Properties by Id
-        /// </summary>
-        /// <returns></returns>
-        Task<Property> CreateAsync(Property property);
-
-        /// <summary>
-        /// Get Properties by Id
-        /// </summary>
-        /// <returns></returns>
-        Task<Property> UpdateAsync(Property property);
+        Task<Property?> GetByIdAsync(int id);
     }
 }

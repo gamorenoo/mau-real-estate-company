@@ -16,9 +16,9 @@ namespace Application.Properties.Create
 
     public class CreatePropertyCommnadHandler : IRequestHandler<CreatePropertyCommnad, Property>
     {
-        private readonly IPropertyRepository _propertyRepository;
+        private readonly IPropertyCommandRepository _propertyRepository;
 
-        public CreatePropertyCommnadHandler(IPropertyRepository propertyRepository)
+        public CreatePropertyCommnadHandler(IPropertyCommandRepository propertyRepository)
         {
             _propertyRepository = propertyRepository;
         }
@@ -31,9 +31,6 @@ namespace Application.Properties.Create
                 Year = request.Property.Year,
                 IdOwner = request.Property.IdOwner,
                 Price = request.Property.Price,
-                //Created = DateTime.UtcNow,
-                //CreatedBy = "gustavoamoreno@outlook.com",
-                //RowVersion = Guid.NewGuid()
             };
 
             return await _propertyRepository.CreateAsync(Property);
