@@ -27,7 +27,7 @@ namespace Application.Addresses.Create
 
         public async Task<Address> Handle(CreateAddressCommand request, CancellationToken cancellationToken)
         {
-            Address Property = new Address()
+            Address address = new Address()
             {
                 Street = request.Address.Street,
                 City = request.Address.City,
@@ -38,7 +38,7 @@ namespace Application.Addresses.Create
                 OwnerId = request.IdOwner
             };
 
-            return await _addressCommandRepository.CreateAsync(Property);
+            return await _addressCommandRepository.CreateAsync(address);
         }
     }
 }

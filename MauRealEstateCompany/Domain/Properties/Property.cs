@@ -1,4 +1,5 @@
-﻿using Domain.Common;
+﻿using Domain.Addresses;
+using Domain.Common;
 using Domain.Owners;
 using System;
 using System.Collections.Generic;
@@ -19,5 +20,6 @@ namespace Domain.Properties
         [ForeignKey(nameof(IdOwner))]
         public int IdOwner { get; set; }
         public virtual Owner Owner { get; set; }
+        public virtual Address Address { get; set; }
     }
 }

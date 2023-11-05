@@ -38,6 +38,7 @@ namespace Application.Properties.Create
 
             var property = await _propertyRepository.CreateAsync(Property);
 
+            // Insert Address to Property
             CreateAddressCommand commandAddres = new CreateAddressCommand() { 
                 Address = request.Property.Addresses,
                 IdProperty = property.IdProperty

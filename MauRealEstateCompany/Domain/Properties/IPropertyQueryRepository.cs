@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
 namespace Domain.Properties
 {
@@ -19,5 +15,12 @@ namespace Domain.Properties
         /// </summary>
         /// <returns></returns>
         Task<Property?> GetByIdAsync(int id);
+
+        /// <summary>
+        /// Get Properties With Filters
+        /// </summary>
+        /// <param name="propertyFiltersDto"></param>
+        /// <returns></returns>
+        Task<IEnumerable<Property>> GetPropertiesWithFilterAsync(PropertyFiltersDto propertyFiltersDto);
     }
 }

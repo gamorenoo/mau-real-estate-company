@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore.Query;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -26,5 +27,10 @@ namespace Infrastructure.Repositories.GenericRepository.QueryRepository
         /// <param name="filter"></param>
         /// <returns></returns>
         Task<IEnumerable<T>> GetList(Expression<Func<T, bool>> filter = null);
+
+        IQueryable<T> GetAll();
+
+        IQueryable<T> Get(Expression<Func<T, bool>> filter = null, Func<IQueryable<T>, IIncludableQueryable<T, object>> includes = null,
+        Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null);
     }
 }

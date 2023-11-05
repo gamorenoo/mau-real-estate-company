@@ -1,4 +1,5 @@
-﻿using Domain.Properties;
+﻿using Domain.Addresses;
+using Domain.Properties;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
@@ -25,7 +26,12 @@ namespace Infrastructure.Persistence.Configurations
                 .HasMaxLength(30)
                 .IsUnicode(false);
 
-            builder.HasOne(a => a.Owner).WithMany().HasForeignKey(b => b.IdOwner);
+            builder.HasOne(a => a.Owner)
+                .WithMany().HasForeignKey(b => b.IdOwner);
+            
+            builder.HasOne(a => a.Address)
+                .WithOne(c => c.Property)
+                .HasForeignKey<Address>(b => b.IdProperty);
         }
     }
 }

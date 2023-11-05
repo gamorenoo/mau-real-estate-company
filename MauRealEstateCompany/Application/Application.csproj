@@ -19,10 +19,6 @@
 
   <ItemGroup>
     <Folder Include="Addresses\GetAdrressByProperty\" />
-    <Folder Include="Addresses\Delete\" />
-    <Folder Include="Properties\ChangePrice\" />
-    <Folder Include="Properties\ListWithFilters\" />
-    <Folder Include="Properties\Update\" />
   </ItemGroup>
 
 </Project>

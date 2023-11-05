@@ -1,5 +1,6 @@
 ﻿using Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -43,6 +44,28 @@ namespace Infrastructure.Repositories.GenericRepository.QueryRepository
         public async Task<IEnumerable<TEntity>> GetList(Expression<Func<TEntity, bool>> filter = null)
         {
             return await (filter == null ? _appDBcontext.Set<TEntity>().ToListAsync() : _appDBcontext.Set<TEntity>().Where(filter).ToListAsync());
+        }
+
+        public virtual IQueryable<TEntity> GetAll()
+        { 
+            return _appDBcontext.Set<TEntity>().AsQueryable();
+        }
+
+        public virtual IQueryable<TEntity> Get(Expression<Func<TEntity, bool>> filter = null, Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> includes = null,
+            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null)
+        {
+            IQueryable<TEntity> query = GetAll();
+
+            if (filter != null)
+                query = query.Where(filter);
+
+            if (includes != null)
+                query = includes(query);
+
+            if (orderBy != null)
+                query = orderBy(query);
+
+            return query;
         }
     }
 }
