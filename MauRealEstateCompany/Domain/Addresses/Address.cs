@@ -2,9 +2,9 @@
 using Domain.Properties;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Domain.Address
+namespace Domain.Addresses
 {
-    public class Addresses
+    public class Address
     {
         public int IdAddres { get; set; }
         public string Street { get; set; }

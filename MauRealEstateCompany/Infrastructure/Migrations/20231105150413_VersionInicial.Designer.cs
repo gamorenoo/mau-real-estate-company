@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231104220946_VersionInicial")]
+    [Migration("20231105150413_VersionInicial")]
     partial class VersionInicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,7 +24,7 @@ namespace Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("Domain.Entities.Address", b =>
+            modelBuilder.Entity("Domain.Addresses.Address", b =>
                 {
                     b.Property<int>("IdAddres")
                         .ValueGeneratedOnAdd()
@@ -48,7 +48,6 @@ namespace Infrastructure.Migrations
                         .HasColumnType("int");
 
                     b.Property<int?>("OwnerId")
-                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<string>("State")
@@ -76,12 +75,13 @@ namespace Infrastructure.Migrations
                         .HasFilter("[IdProperty] IS NOT NULL");
 
                     b.HasIndex("OwnerId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[OwnerId] IS NOT NULL");
 
                     b.ToTable("Address", (string)null);
                 });
 
-            modelBuilder.Entity("Domain.Entities.Owner", b =>
+            modelBuilder.Entity("Domain.Owners.Owner", b =>
                 {
                     b.Property<int>("IdOwner")
                         .ValueGeneratedOnAdd()
@@ -126,7 +126,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("Owner", (string)null);
                 });
 
-            modelBuilder.Entity("Domain.Entities.Property", b =>
+            modelBuilder.Entity("Domain.Properties.Property", b =>
                 {
                     b.Property<int>("IdProperty")
                         .ValueGeneratedOnAdd()
@@ -165,8 +165,6 @@ namespace Infrastructure.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<Guid>("RowVersion")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Year")
@@ -179,7 +177,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("Property", (string)null);
                 });
 
-            modelBuilder.Entity("Domain.Entities.PropertyImage", b =>
+            modelBuilder.Entity("Domain.PropertyImages.PropertyImage", b =>
                 {
                     b.Property<int>("IdPropertyImage")
                         .ValueGeneratedOnAdd()
@@ -223,7 +221,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("PropertyImage", (string)null);
                 });
 
-            modelBuilder.Entity("Domain.Entities.PropertyTrace", b =>
+            modelBuilder.Entity("Domain.PropertyTraces.PropertyTrace", b =>
                 {
                     b.Property<int>("IdPropertyTrace")
                         .ValueGeneratedOnAdd()
@@ -273,26 +271,24 @@ namespace Infrastructure.Migrations
                     b.ToTable("PropertyTrace", (string)null);
                 });
 
-            modelBuilder.Entity("Domain.Entities.Address", b =>
+            modelBuilder.Entity("Domain.Addresses.Address", b =>
                 {
-                    b.HasOne("Domain.Entities.Property", "Property")
+                    b.HasOne("Domain.Properties.Property", "Property")
                         .WithOne()
-                        .HasForeignKey("Domain.Entities.Address", "IdProperty");
+                        .HasForeignKey("Domain.Addresses.Address", "IdProperty");
 
-                    b.HasOne("Domain.Entities.Owner", "Owner")
+                    b.HasOne("Domain.Owners.Owner", "Owner")
                         .WithOne()
-                        .HasForeignKey("Domain.Entities.Address", "OwnerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("Domain.Addresses.Address", "OwnerId");
 
                     b.Navigation("Owner");
 
                     b.Navigation("Property");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Property", b =>
+            modelBuilder.Entity("Domain.Properties.Property", b =>
                 {
-                    b.HasOne("Domain.Entities.Owner", "Owner")
+                    b.HasOne("Domain.Owners.Owner", "Owner")
                         .WithMany()
                         .HasForeignKey("IdOwner")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -301,9 +297,9 @@ namespace Infrastructure.Migrations
                     b.Navigation("Owner");
                 });
 
-            modelBuilder.Entity("Domain.Entities.PropertyImage", b =>
+            modelBuilder.Entity("Domain.PropertyImages.PropertyImage", b =>
                 {
-                    b.HasOne("Domain.Entities.Property", "Property")
+                    b.HasOne("Domain.Properties.Property", "Property")
                         .WithMany()
                         .HasForeignKey("IdProperty")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -312,9 +308,9 @@ namespace Infrastructure.Migrations
                     b.Navigation("Property");
                 });
 
-            modelBuilder.Entity("Domain.Entities.PropertyTrace", b =>
+            modelBuilder.Entity("Domain.PropertyTraces.PropertyTrace", b =>
                 {
-                    b.HasOne("Domain.Entities.Property", "Property")
+                    b.HasOne("Domain.Properties.Property", "Property")
                         .WithMany()
                         .HasForeignKey("IdProperty")
                         .OnDelete(DeleteBehavior.Cascade)

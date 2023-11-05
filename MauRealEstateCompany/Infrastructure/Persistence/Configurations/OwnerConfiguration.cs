@@ -17,10 +17,6 @@ namespace Infrastructure.Persistence.Configurations
 
             builder.HasKey("IdOwner");
 
-            builder.Property(p => p.RowVersion)
-               .IsConcurrencyToken()
-               .ValueGeneratedOnAddOrUpdate();
-
             builder.Property(e => e.Name)
                 .HasMaxLength(200)
                 .IsUnicode(false);

@@ -17,10 +17,6 @@ namespace Infrastructure.Persistence.Configurations
 
             builder.HasKey("IdPropertyImage");
 
-            builder.Property(p => p.RowVersion)
-               .IsConcurrencyToken()
-               .ValueGeneratedOnAddOrUpdate();
-
             builder.Property(e => e.File)
                 .HasMaxLength(200)
                 .IsUnicode(false);

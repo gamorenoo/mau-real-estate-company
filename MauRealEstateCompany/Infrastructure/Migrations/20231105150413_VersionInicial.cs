@@ -44,7 +44,7 @@ namespace Infrastructure.Migrations
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
                     LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    RowVersion = table.Column<Guid>(type: "uniqueidentifier", rowVersion: true, nullable: false)
+                    RowVersion = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -69,7 +69,7 @@ namespace Infrastructure.Migrations
                     Country = table.Column<string>(type: "varchar(50)", unicode: false, maxLength: 50, nullable: false),
                     ZipCode = table.Column<string>(type: "varchar(10)", unicode: false, maxLength: 10, nullable: false),
                     IdProperty = table.Column<int>(type: "int", nullable: true),
-                    OwnerId = table.Column<int>(type: "int", nullable: false)
+                    OwnerId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -78,8 +78,7 @@ namespace Infrastructure.Migrations
                         name: "FK_Address_Owner_OwnerId",
                         column: x => x.OwnerId,
                         principalTable: "Owner",
-                        principalColumn: "IdOwner",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "IdOwner");
                     table.ForeignKey(
                         name: "FK_Address_Property_IdProperty",
                         column: x => x.IdProperty,
@@ -152,7 +151,8 @@ namespace Infrastructure.Migrations
                 name: "IX_Address_OwnerId",
                 table: "Address",
                 column: "OwnerId",
-                unique: true);
+                unique: true,
+                filter: "[OwnerId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Property_IdOwner",

@@ -1,4 +1,4 @@
-﻿using Domain.Address;
+﻿using Domain.Addresses;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Persistence.Configurations
 {
-    public class AddressConfiguration : IEntityTypeConfiguration<Addresses>
+    public class AddressConfiguration : IEntityTypeConfiguration<Address>
     {
-        public void Configure(EntityTypeBuilder<Addresses> builder)
+        public void Configure(EntityTypeBuilder<Address> builder)
         {
             builder.ToTable("Address");
 
@@ -37,8 +37,11 @@ namespace Infrastructure.Persistence.Configurations
                 .HasMaxLength(10)
                 .IsUnicode(false);
 
-            builder.HasOne(a => a.Owner).WithOne().HasForeignKey<Addresses>(b => b.OwnerId);
-            builder.HasOne(a => a.Property).WithOne().HasForeignKey<Addresses>(b => b.IdProperty);
+            builder.Property(e => e.OwnerId).IsRequired(false);
+            builder.Property(e => e.IdProperty).IsRequired(false);
+
+            builder.HasOne(a => a.Owner).WithOne().HasForeignKey<Address>(b => b.OwnerId);
+            builder.HasOne(a => a.Property).WithOne().HasForeignKey<Address>(b => b.IdProperty);
 
         }
     }

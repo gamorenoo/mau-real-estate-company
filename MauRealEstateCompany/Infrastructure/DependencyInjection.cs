@@ -8,6 +8,8 @@ using Domain.Properties;
 using Infrastructure.Repositories.PropertyRepository;
 using Infrastructure.Repositories.GenericRepository.CommandRepository;
 using Infrastructure.Repositories.GenericRepository.QueryRepository;
+using Domain.Addresses;
+using Infrastructure.Repositories.AddressRepository;
 
 namespace Infrastructure
 {
@@ -26,6 +28,8 @@ namespace Infrastructure
             services.AddTransient(typeof(IQueryRepository<>), typeof(QueryRepository<>));
             services.AddScoped<IPropertyQueryRepository, PropertyQueryRepository>();
             services.AddScoped<IPropertyCommandRepository, PropertyCommandRepository>();
+            services.AddScoped<IAddressQueryRepository, AddressQueryRepository>();
+            services.AddScoped<IAddressCommandRepository, AddressCommandRepository>();
 
             return services;
         }

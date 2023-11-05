@@ -1,5 +1,5 @@
 ﻿using Application.Common.Interfaces;
-using Domain.Address;
+using Domain.Addresses;
 using Domain.Common;
 using Domain.Owners;
 using Domain.Properties;
@@ -32,7 +32,7 @@ namespace Infrastructure.Persistence
 
         public DbSet<PropertyTrace> PropertyTraces => Set<PropertyTrace>();
 
-        public DbSet<Addresses> Addresses => Set<Addresses>();
+        public DbSet<Address> Addresses => Set<Address>();
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {

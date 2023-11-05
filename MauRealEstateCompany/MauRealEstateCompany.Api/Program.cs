@@ -88,7 +88,9 @@ using (var scope = app.Services.CreateScope())
     var scopeProvider = scope.ServiceProvider;
     var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
     dbContext.Database.Migrate();
-    // await ApplicationDbContextSeed.SeedSampleDataAsync(dbContext);
+
+    // Agregar dtos de prueba para Owner
+    await ApplicationDbContextSeed.SeedSampleDataAsync(dbContext);
 }
 
 // Configure the HTTP request pipeline.

@@ -1,4 +1,5 @@
-﻿using Domain.Properties;
+﻿using Application.Addresses.Create;
+using Domain.Properties;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -17,9 +18,11 @@ namespace Application.Properties.Create
     public class CreatePropertyCommnadHandler : IRequestHandler<CreatePropertyCommnad, Property>
     {
         private readonly IPropertyCommandRepository _propertyRepository;
+        private readonly MediatR.ISender _sender;
 
-        public CreatePropertyCommnadHandler(IPropertyCommandRepository propertyRepository)
+        public CreatePropertyCommnadHandler(IPropertyCommandRepository propertyRepository, MediatR.ISender sender)
         {
+            _sender = sender;
             _propertyRepository = propertyRepository;
         }
 
@@ -33,7 +36,16 @@ namespace Application.Properties.Create
                 Price = request.Property.Price,
             };
 
-            return await _propertyRepository.CreateAsync(Property);
+            var property = await _propertyRepository.CreateAsync(Property);
+
+            CreateAddressCommand commandAddres = new CreateAddressCommand() { 
+                Address = request.Property.Addresses,
+                IdProperty = property.IdProperty
+            };
+
+            await _sender.Send(commandAddres);
+
+            return property;
         }
     }
 }

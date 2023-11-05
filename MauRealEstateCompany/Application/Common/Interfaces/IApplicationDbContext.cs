@@ -1,4 +1,4 @@
-﻿using Domain.Address;
+﻿using Domain.Addresses;
 using Domain.Owners;
 using Domain.Properties;
 using Domain.PropertyImages;
@@ -20,7 +20,7 @@ namespace Application.Common.Interfaces
         public DbSet<Owner> Owners { get; }
         public DbSet<PropertyImage> PropertyImages{ get; }
         public DbSet<PropertyTrace> PropertyTraces { get; }
-        public DbSet<Addresses> Addresses { get; }
+        public DbSet<Address> Addresses { get; }
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }
