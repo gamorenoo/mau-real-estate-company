@@ -1,4 +1,8 @@
-﻿using Domain.Entities;
+﻿using Domain.Address;
+using Domain.Owners;
+using Domain.Properties;
+using Domain.PropertyImages;
+using Domain.PropertyTraces;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -16,7 +20,7 @@ namespace Application.Common.Interfaces
         public DbSet<Owner> Owners { get; }
         public DbSet<PropertyImage> PropertyImages{ get; }
         public DbSet<PropertyTrace> PropertyTraces { get; }
-        public DbSet<Address> Addresses { get; }
+        public DbSet<Addresses> Addresses { get; }
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }

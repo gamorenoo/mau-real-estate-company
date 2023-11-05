@@ -17,4 +17,10 @@
     <ProjectReference Include="..\Domain\Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Properties\ChangePrice\" />
+    <Folder Include="Properties\ListWithFilters\" />
+    <Folder Include="Properties\Update\" />
+  </ItemGroup>
+
 </Project>

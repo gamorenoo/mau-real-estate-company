@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.Entities
+namespace Domain.Owners
 {
-    public class Owner: AuditableEntity
+    public class Owner : AuditableEntity
     {
         public int IdOwner { get; set; }
         public string Name { get; set; }

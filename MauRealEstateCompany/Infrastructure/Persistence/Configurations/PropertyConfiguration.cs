@@ -1,4 +1,4 @@
-﻿using Domain.Entities;
+﻿using Domain.Properties;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
@@ -16,10 +16,6 @@ namespace Infrastructure.Persistence.Configurations
             builder.ToTable("Property");
 
             builder.HasKey("IdProperty");
-
-            builder.Property(p => p.RowVersion)
-               .IsConcurrencyToken()
-               .ValueGeneratedOnAddOrUpdate();
 
             builder.Property(e => e.Name)
                 .HasMaxLength(200)
