@@ -10,6 +10,8 @@ using Infrastructure.Repositories.GenericRepository.CommandRepository;
 using Infrastructure.Repositories.GenericRepository.QueryRepository;
 using Domain.Addresses;
 using Infrastructure.Repositories.AddressRepository;
+using Domain.PropertyImages;
+using Infrastructure.Repositories.PropertyImageRepository;
 
 namespace Infrastructure
 {
@@ -30,6 +32,7 @@ namespace Infrastructure
             services.AddScoped<IPropertyCommandRepository, PropertyCommandRepository>();
             services.AddScoped<IAddressQueryRepository, AddressQueryRepository>();
             services.AddScoped<IAddressCommandRepository, AddressCommandRepository>();
+            services.AddScoped<IPropertyImageCommandRepository, PropertyImageCommandRepository>();
 
             return services;
         }
