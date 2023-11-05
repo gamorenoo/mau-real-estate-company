@@ -1,13 +1,16 @@
 ﻿using Application.Properties.Create;
 using Application.PropertyImages.Create;
 using Domain.PropertyImages;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MauRealEstateCompany.Api.Controllers
 {
     /// <summary>
-    /// 
+    /// Property Image Controller
     /// </summary>
+    [Authorize]
+    [Route("api/")]
     public class PropertyImageController : ApiControllerBase
     {
         private readonly ILogger<PropertyImageController> _logger;

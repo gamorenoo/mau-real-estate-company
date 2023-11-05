@@ -6,6 +6,7 @@ using Domain.Properties;
 using Domain.PropertyImages;
 using Domain.PropertyTraces;
 using Infrastructure.Persistence.Configurations;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
@@ -19,9 +20,10 @@ namespace Infrastructure.Persistence
 {
     public class ApplicationDbContext : DbContext, IApplicationDbContext
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options, IHttpContextAccessor httpContextAccessor) : base(options)
         {
-
+            _httpContextAccessor = httpContextAccessor;
         }
 
         public DbSet<Property> Properties => Set<Property>();
@@ -36,18 +38,19 @@ namespace Infrastructure.Persistence
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {
+            var username = _httpContextAccessor?.HttpContext?.User?.Claims.FirstOrDefault()?.Value;
             foreach (var entry in ChangeTracker.Entries<AuditableEntity>())
             {
                 switch (entry.State)
                 {
                     case EntityState.Added:
-                        entry.Entity.CreatedBy = "gustavoamoreno@outlook.com";
+                        entry.Entity.CreatedBy = username ?? "gustavoamoreno@outlook.com";
                         entry.Entity.Created = DateTime.UtcNow;
                         entry.Entity.RowVersion = Guid.NewGuid();
                         break;
 
                     case EntityState.Modified:
-                        entry.Entity.LastModifiedBy = "gustavoamoreno@outlook.com";
+                        entry.Entity.LastModifiedBy = username ?? "gustavoamoreno@outlook.com";
                         entry.Entity.LastModified = DateTime.UtcNow;
                         entry.Entity.RowVersion = Guid.NewGuid();
                         break;

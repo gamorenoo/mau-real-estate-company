@@ -21,7 +21,7 @@ namespace MauRealEstateCompany.Api.Controllers
         /// <param name="user">Usuario con Coreo y clave validos</param>
         /// <remarks>
         ///    POST /login
-        ///    {"email": "string","password": "string"}
+        ///    {"email": "gustavoamoreno@outlook.com","password": "0123456789"}
         /// </remarks>
         /// <returns>Token de sesión</returns>
         /// <response code="200">Token de sesión</response>

@@ -9,10 +9,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MauRealEstateCompany.Api.Controllers
 {
-    // [Authorize]
     /// <summary>
     /// Property Controller
     /// </summary>
+    [Authorize]
     [Route("api/")]
     public class PropertyController : ApiControllerBase
     {
