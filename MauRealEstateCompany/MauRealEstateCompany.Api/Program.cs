@@ -1,8 +1,11 @@
 using Application;
+using FluentValidation.AspNetCore;
 using Infrastructure;
 using Infrastructure.Persistence;
+using MauRealEstateCompany.Api.Filters;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
@@ -17,7 +20,9 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
 
-builder.Services.AddControllers().AddJsonOptions(x =>
+builder.Services.AddControllers(options => options.Filters.Add<ApiExceptionFilterAttribute>())
+    .AddFluentValidation(x => x.AutomaticValidationEnabled = false)
+    .AddJsonOptions(x =>
    x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -66,6 +71,8 @@ builder.Services.AddSwaggerGen(options =>
     var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
     options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
 });
+
+
 
 // Add Jwt
 var jwtSecretKetBytes = Encoding.UTF8.GetBytes(builder.Configuration.GetSection("JwtSetting").GetValue<string>("SecretKey"));

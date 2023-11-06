@@ -1,6 +1,8 @@
 ﻿using Application.Addresses.Create;
 using Application.Addresses.Delete;
+using Application.Common.Exceptions;
 using Application.Properties.Create;
+using Domain.Owners;
 using Domain.Properties;
 using MediatR;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
@@ -15,14 +17,17 @@ namespace Application.Properties.Update
         {
             private readonly IPropertyCommandRepository _propertyCommandRepository;
             private readonly IPropertyQueryRepository _propertyQueryRepository;
+            private readonly IOwnerQueryRepository _ownerQueryRepository;
             private readonly MediatR.ISender _sender;
             public UpdatePropertyCommnadCommnadHandler(ISender sender
                 , IPropertyQueryRepository propertyQueryRepository
-                , IPropertyCommandRepository propertyCommandRepository)
+                , IPropertyCommandRepository propertyCommandRepository
+                , IOwnerQueryRepository ownerQueryRepository)
             {
                 _sender = sender;
                 _propertyQueryRepository = propertyQueryRepository;
                 _propertyCommandRepository = propertyCommandRepository;
+                _ownerQueryRepository = ownerQueryRepository;
             }
 
             public async Task<Domain.Properties.Property> Handle(UpdatePropertyCommnad request, CancellationToken cancellationToken)
@@ -30,7 +35,13 @@ namespace Application.Properties.Update
                 Domain.Properties.Property? property = await _propertyQueryRepository.GetByIdAsync(request.Property.IdProperty);
 
                 if(property == null) {
-                    throw new Exception($"The Property with Id: {request.Property.IdProperty} No found");
+                    throw new NotFoundException(nameof(Property), request.Property.IdProperty);
+                }
+
+                var owner = await _ownerQueryRepository.GetByIdAsync(request.Property.IdOwner);
+                if (owner == null)
+                {
+                    throw new NotFoundException(nameof(Owner), request.Property.IdOwner);
                 }
 
                 property.Name = request.Property.Name;

@@ -14,6 +14,8 @@ using Domain.PropertyImages;
 using Infrastructure.Repositories.PropertyImageRepository;
 using Application.Auth.Login;
 using Infrastructure.Auth;
+using Domain.Owners;
+using Infrastructure.Repositories.OwnersRepository;
 
 namespace Infrastructure
 {
@@ -38,6 +40,7 @@ namespace Infrastructure
             services.AddScoped<IAddressQueryRepository, AddressQueryRepository>();
             services.AddScoped<IAddressCommandRepository, AddressCommandRepository>();
             services.AddScoped<IPropertyImageCommandRepository, PropertyImageCommandRepository>();
+            services.AddScoped<IOwnerQueryRepository, OwnerQueryRepository>();
 
             return services;
         }

@@ -1,4 +1,5 @@
-﻿using Application.Properties.Create;
+﻿using Application.Common.Exceptions;
+using Application.Properties.Create;
 using Domain.Properties;
 using MediatR;
 using System;
@@ -32,7 +33,7 @@ namespace Application.Properties.ChangePrice
 
             if (property == null)
             {
-                throw new Exception($"The Property with Id: {request.PropertyPrice.IdProperty} No found");
+                throw new NotFoundException(nameof(Property), request.PropertyPrice.IdProperty);
             }
 
             property.Price = request.PropertyPrice.NewPrice;

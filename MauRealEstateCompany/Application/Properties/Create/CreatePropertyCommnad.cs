@@ -1,4 +1,6 @@
 ﻿using Application.Addresses.Create;
+using Application.Common.Exceptions;
+using Domain.Owners;
 using Domain.Properties;
 using MediatR;
 using System;
@@ -18,16 +20,26 @@ namespace Application.Properties.Create
     public class CreatePropertyCommnadHandler : IRequestHandler<CreatePropertyCommnad, Property>
     {
         private readonly IPropertyCommandRepository _propertyRepository;
+        private readonly IOwnerQueryRepository _ownerQueryRepository;
         private readonly MediatR.ISender _sender;
 
-        public CreatePropertyCommnadHandler(IPropertyCommandRepository propertyRepository, MediatR.ISender sender)
+        public CreatePropertyCommnadHandler(MediatR.ISender sender
+            , IPropertyCommandRepository propertyRepository
+            , IOwnerQueryRepository ownerQueryRepository)
         {
             _sender = sender;
             _propertyRepository = propertyRepository;
+            _ownerQueryRepository = ownerQueryRepository;
         }
 
         public async Task<Property> Handle(CreatePropertyCommnad request, CancellationToken cancellationToken)
         {
+            var owner = await _ownerQueryRepository.GetByIdAsync(request.Property.IdOwner);
+            if (owner == null)
+            {
+                throw new NotFoundException(nameof(Owner), request.Property.IdOwner);
+            }
+
             Property Property = new Property() { 
                 Name = request.Property.Name,
                 CodeInternal = request.Property.CodeInternal,
