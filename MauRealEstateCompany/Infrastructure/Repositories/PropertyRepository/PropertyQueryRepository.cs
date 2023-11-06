@@ -44,7 +44,7 @@ namespace Infrastructure.Repositories.PropertyRepository
             //                , includes: i => i.Include(x => x.Owner)
             //                .Include(x => x.Address)
             //                ).ToListAsync();
-            IQueryable<Property> propertiesQuery = _queryyRepository.Get(includes: i => i.Include(x => x.Owner).Include(x => x.Address));
+            IQueryable<Property> propertiesQuery = _queryyRepository.Get(includes: i => i.Include(x => x.Owner).Include(x => x.Address).Include(x => x.Images));
 
             if (propertyFiltersDto.IdProperty != null)
                 propertiesQuery = propertiesQuery.Where(x => x.IdProperty == propertyFiltersDto.IdProperty);

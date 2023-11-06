@@ -15,7 +15,7 @@ namespace Infrastructure.Persistence.Configurations
         {
             builder.ToTable("Address");
 
-            builder.HasKey("IdAddres");
+            builder.HasKey("IdAddress");
 
             builder.Property(e => e.Street)
                 .HasMaxLength(200)

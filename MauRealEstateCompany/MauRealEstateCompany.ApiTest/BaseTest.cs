@@ -101,7 +101,7 @@ namespace MauRealEstateCompany.ApplicationTest
         public void InitDataSql(string file)
         {
             var patch = Environment.ProcessPath;
-            patch = patch.Replace("\\bin\\Debug\\net6.0\\testhost.exe", string.Format(@"\Script\{0}.sql", file));
+            patch = patch.Replace("\\bin\\Debug\\net6.0\\testhost.exe", string.Format(@"\Scripts\{0}.sql", file));
             string script = File.ReadAllText(patch);
             var dbContext = serviceProvider.GetService<ApplicationDbContext>();
             dbContext.Database.ExecuteSqlRaw(script);

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231105150413_VersionInicial")]
+    [Migration("20231106181140_VersionInicial")]
     partial class VersionInicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -26,11 +26,11 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Domain.Addresses.Address", b =>
                 {
-                    b.Property<int>("IdAddres")
+                    b.Property<int>("IdAddress")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdAddres"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdAddress"), 1L, 1);
 
                     b.Property<string>("City")
                         .IsRequired()
@@ -44,11 +44,26 @@ namespace Infrastructure.Migrations
                         .IsUnicode(false)
                         .HasColumnType("varchar(50)");
 
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int?>("IdProperty")
                         .HasColumnType("int");
 
+                    b.Property<DateTime?>("LastModified")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int?>("OwnerId")
                         .HasColumnType("int");
+
+                    b.Property<Guid>("RowVersion")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("State")
                         .IsRequired()
@@ -68,7 +83,7 @@ namespace Infrastructure.Migrations
                         .IsUnicode(false)
                         .HasColumnType("varchar(10)");
 
-                    b.HasKey("IdAddres");
+                    b.HasKey("IdAddress");
 
                     b.HasIndex("IdProperty")
                         .IsUnique()
@@ -117,8 +132,6 @@ namespace Infrastructure.Migrations
                         .HasColumnType("varchar(200)");
 
                     b.Property<Guid>("RowVersion")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("IdOwner");
@@ -210,8 +223,6 @@ namespace Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("RowVersion")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("IdPropertyImage");
@@ -274,7 +285,7 @@ namespace Infrastructure.Migrations
             modelBuilder.Entity("Domain.Addresses.Address", b =>
                 {
                     b.HasOne("Domain.Properties.Property", "Property")
-                        .WithOne()
+                        .WithOne("Address")
                         .HasForeignKey("Domain.Addresses.Address", "IdProperty");
 
                     b.HasOne("Domain.Owners.Owner", "Owner")
@@ -300,7 +311,7 @@ namespace Infrastructure.Migrations
             modelBuilder.Entity("Domain.PropertyImages.PropertyImage", b =>
                 {
                     b.HasOne("Domain.Properties.Property", "Property")
-                        .WithMany()
+                        .WithMany("Images")
                         .HasForeignKey("IdProperty")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -317,6 +328,14 @@ namespace Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Property");
+                });
+
+            modelBuilder.Entity("Domain.Properties.Property", b =>
+                {
+                    b.Navigation("Address")
+                        .IsRequired();
+
+                    b.Navigation("Images");
                 });
 #pragma warning restore 612, 618
         }

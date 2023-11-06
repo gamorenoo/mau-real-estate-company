@@ -1,5 +1,6 @@
 ﻿using Domain.Addresses;
 using Domain.Properties;
+using Domain.PropertyImages;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
@@ -32,6 +33,7 @@ namespace Infrastructure.Persistence.Configurations
             builder.HasOne(a => a.Address)
                 .WithOne(c => c.Property)
                 .HasForeignKey<Address>(b => b.IdProperty);
+
         }
     }
 }

@@ -22,7 +22,7 @@ namespace Infrastructure.Migrations
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
                     LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    RowVersion = table.Column<Guid>(type: "uniqueidentifier", rowVersion: true, nullable: false)
+                    RowVersion = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -61,7 +61,7 @@ namespace Infrastructure.Migrations
                 name: "Address",
                 columns: table => new
                 {
-                    IdAddres = table.Column<int>(type: "int", nullable: false)
+                    IdAddress = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Street = table.Column<string>(type: "varchar(200)", unicode: false, maxLength: 200, nullable: false),
                     City = table.Column<string>(type: "varchar(50)", unicode: false, maxLength: 50, nullable: false),
@@ -69,11 +69,16 @@ namespace Infrastructure.Migrations
                     Country = table.Column<string>(type: "varchar(50)", unicode: false, maxLength: 50, nullable: false),
                     ZipCode = table.Column<string>(type: "varchar(10)", unicode: false, maxLength: 10, nullable: false),
                     IdProperty = table.Column<int>(type: "int", nullable: true),
-                    OwnerId = table.Column<int>(type: "int", nullable: true)
+                    OwnerId = table.Column<int>(type: "int", nullable: true),
+                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    RowVersion = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Address", x => x.IdAddres);
+                    table.PrimaryKey("PK_Address", x => x.IdAddress);
                     table.ForeignKey(
                         name: "FK_Address_Owner_OwnerId",
                         column: x => x.OwnerId,
@@ -99,7 +104,7 @@ namespace Infrastructure.Migrations
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
                     LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    RowVersion = table.Column<Guid>(type: "uniqueidentifier", rowVersion: true, nullable: false)
+                    RowVersion = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {

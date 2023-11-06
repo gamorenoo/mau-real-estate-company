@@ -46,12 +46,12 @@ namespace Application.PropertyImages.Create
         private string SaveImageInServer(IFormFile formFile, string path, int IdProperty) {
             string pathImage = Path.Combine(path, IdProperty.ToString());
 
-            if (!Directory.Exists(path))
+            if (!Directory.Exists(pathImage))
             { 
-                Directory.CreateDirectory(path);
+                Directory.CreateDirectory(pathImage);
             }
 
-            path = Path.Combine(path, formFile.FileName);
+            pathImage = Path.Combine(pathImage, formFile.FileName);
 
             if (!Directory.Exists(path))
             {

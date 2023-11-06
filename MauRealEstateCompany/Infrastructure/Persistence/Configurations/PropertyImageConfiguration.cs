@@ -21,7 +21,9 @@ namespace Infrastructure.Persistence.Configurations
                 .HasMaxLength(200)
                 .IsUnicode(false);
 
-            builder.HasOne(a => a.Property).WithMany().HasForeignKey(b => b.IdProperty);
+            builder.HasOne(e => e.Property)
+            .WithMany(e => e.Images)
+            .HasForeignKey(e => e.IdProperty);
         }
     }
 }

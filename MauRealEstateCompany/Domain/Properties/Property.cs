@@ -1,6 +1,7 @@
 ﻿using Domain.Addresses;
 using Domain.Common;
 using Domain.Owners;
+using Domain.PropertyImages;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -21,5 +22,6 @@ namespace Domain.Properties
         public int IdOwner { get; set; }
         public virtual Owner Owner { get; set; }
         public virtual Address Address { get; set; }
+        public virtual ICollection<PropertyImage> Images { get; set; }
     }
 }

@@ -1,12 +1,13 @@
-﻿using Domain.Owners;
+﻿using Domain.Common;
+using Domain.Owners;
 using Domain.Properties;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain.Addresses
 {
-    public class Address
+    public class Address : AuditableEntity
     {
-        public int IdAddres { get; set; }
+        public int IdAddress { get; set; }
         public string Street { get; set; }
         public string City { get; set; }
         public string State { get; set; }
