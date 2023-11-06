@@ -1,5 +1,4 @@
 ﻿using Application.Auth.Login;
-using MauRealEstateCompany.Api.Auth;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,11 +7,9 @@ namespace MauRealEstateCompany.Api.Controllers
     public class AuthController : ApiControllerBase
     {
         private readonly ILogger<AuthController> _logger;
-        private readonly TokenService _tokenService;
-        public AuthController(ILogger<AuthController> logger, TokenService tokenService)
+        public AuthController(ILogger<AuthController> logger)
         {
             _logger = logger;
-            _tokenService = tokenService;
         }
 
         /// <summary>
@@ -29,18 +26,9 @@ namespace MauRealEstateCompany.Api.Controllers
         [HttpPost("login", Name = "login")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        public async Task<ActionResult> Login([FromBody] UserDto user)
+        public async Task<ActionResult<string>> Login([FromBody] UserDto user)
         {
-            var userValid = await Mediator.Send(new LoginQuery { User = user });
-
-            if (userValid)
-            {
-                var token = _tokenService.GetToken(user);
-                return Ok(token);
-            }
-            else {
-                return Unauthorized();
-            }
+            return await Mediator.Send(new LoginQuery { User = user });
         }
     }
 }

@@ -3,7 +3,6 @@ using Application.Properties.Create;
 using Application.Properties.ListWithFilters;
 using Application.Properties.Update;
 using Domain.Properties;
-using MauRealEstateCompany.Api.Auth;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

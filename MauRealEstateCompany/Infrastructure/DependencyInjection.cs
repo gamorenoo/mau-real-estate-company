@@ -12,6 +12,8 @@ using Domain.Addresses;
 using Infrastructure.Repositories.AddressRepository;
 using Domain.PropertyImages;
 using Infrastructure.Repositories.PropertyImageRepository;
+using Application.Auth.Login;
+using Infrastructure.Auth;
 
 namespace Infrastructure
 {
@@ -25,9 +27,12 @@ namespace Infrastructure
                         b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
 
             services.AddScoped<IApplicationDbContext>(provider => provider.GetRequiredService<ApplicationDbContext>());
-            
+
+            services.AddScoped<IAuthService, AuthService>();
+
             services.AddTransient(typeof(ICommandRepository<>), typeof(CommandRepository<>));
             services.AddTransient(typeof(IQueryRepository<>), typeof(QueryRepository<>));
+
             services.AddScoped<IPropertyQueryRepository, PropertyQueryRepository>();
             services.AddScoped<IPropertyCommandRepository, PropertyCommandRepository>();
             services.AddScoped<IAddressQueryRepository, AddressQueryRepository>();

@@ -10,25 +10,30 @@ using System.Threading.Tasks;
 
 namespace Application.Auth.Login
 {
-    public class LoginQuery : IRequest<bool>
+    public class LoginQuery : IRequest<string>
     {
         public UserDto User { get; set; }
     }
 
-    public class LoginQueryHandler : IRequestHandler<LoginQuery, bool>
+    public class LoginQueryHandler : IRequestHandler<LoginQuery, string>
     {
         private readonly IMapper _mapper;
+        private readonly IAuthService _authService;
 
-        public LoginQueryHandler(IApplicationDbContext context, IMapper mapper)
+        public LoginQueryHandler(IApplicationDbContext context, IAuthService authService)
         {
-            _mapper = mapper;
+            _authService = authService;
         }
 
-        public async Task<bool> Handle(LoginQuery request, CancellationToken cancellationToken)
+        public async Task<string> Handle(LoginQuery request, CancellationToken cancellationToken)
         {
-            var userIdValid = request.User.Email.Equals("gustavoamoreno@outlook.com") && request.User.Password.Equals("0123456789");
+            var userVaid = _authService.Login(request.User.Email, request.User.Password);
 
-            return userIdValid;
+            if (!userVaid) throw new Exception("User or Password Invalid");
+
+            var token = _authService.GetToken(request.User.Email);
+            
+            return token;
         }
     }
 }
