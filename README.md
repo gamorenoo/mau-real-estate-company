@@ -1,14 +1,30 @@
+
 # mau-real-estate-company
 Compañía de bienes raices - Million And Up
 
+## 1. Planteamiento del problema (Requerimientos)
+
 Una gran empresa de Bienes Raíces requiere crear una API para obtener información sobre propiedades en Estados Unidos
+esta es en una base de datos como se muestra en la imagen:
 
-Se toma la decisión de trabajar con una arquitectura Limpia
+su tarea es crear un conjunto de servicios:
 
-<img align="left" width="116" height="116" src="https://raw.githubusercontent.com/arbems/Clean-Architecture-Solution/main/.github/icon.png" />
+a) Crear edificio de propiedad
+b) Agregar imagen de la propiedad
+c) Cambiar precio
+d) Actualizar propiedad
+e) Listar propiedad con filtros
+
+Nota: El tipo de datos completo depende de sus criterios y agregue el campo según su consideración
 
 
-## Tecnologías
+## 2. Solución
+
+Se toma la decisión de trabajar la solución siguiendo los principios de Clean Architecture en .NET 6. 
+El principal objetivo de esta arquitectura es la capacidad de separar el código en sus diferentes responsabilidades, hacer el código mucho más entendible en el presente y futuro, testeable y fácil de integrar.
+
+
+## 2.1 Tecnologías
 * NET 6 / C#
 * ASP.NET Core 6
 * Sql Server
@@ -21,7 +37,7 @@ Se toma la decisión de trabajar con una arquitectura Limpia
 * SQLite
 * Visual studio Comunity 2022
 
-### Pasos para ejecución de la Api :
+### 3. Pasos para ejecución de la Api :
 Para ejecutar el proyecto de forma local, se debe, realizar los siguientes pasos: 
 1. Clonar o descargar el repositorio de la solución
 2. Crear la base de datos indicada en el archivo de configuracion appsettings.json del api y ajustar la conexion a la instancia de Sql Server de su maqunia:
