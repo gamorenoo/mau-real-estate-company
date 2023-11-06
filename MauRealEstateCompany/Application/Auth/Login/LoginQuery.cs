@@ -1,4 +1,5 @@
-﻿using Application.Common.Interfaces;
+﻿using Application.Common.Exceptions;
+using Application.Common.Interfaces;
 using AutoMapper;
 using MediatR;
 using System;
@@ -17,7 +18,6 @@ namespace Application.Auth.Login
 
     public class LoginQueryHandler : IRequestHandler<LoginQuery, string>
     {
-        private readonly IMapper _mapper;
         private readonly IAuthService _authService;
 
         public LoginQueryHandler(IApplicationDbContext context, IAuthService authService)
@@ -29,7 +29,10 @@ namespace Application.Auth.Login
         {
             var userVaid = _authService.Login(request.User.Email, request.User.Password);
 
-            if (!userVaid) throw new Exception("User or Password Invalid");
+            if (!userVaid)
+            {
+                throw new UnauthorizedAccessException("User or Password Invalid");
+            }
 
             var token = _authService.GetToken(request.User.Email);
             

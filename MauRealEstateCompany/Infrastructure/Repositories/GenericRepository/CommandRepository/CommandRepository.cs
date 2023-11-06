@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Repositories.GenericRepository.CommandRepository
 {
-    internal class CommandRepository<TEntity> : ICommandRepository<TEntity> where TEntity : class, new()
+    public class CommandRepository<TEntity> : ICommandRepository<TEntity> where TEntity : class, new()
     {
         private readonly ApplicationDbContext _appDBcontext;
 

@@ -4,9 +4,16 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MauRealEstateCompany.Api.Controllers
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class AuthController : ApiControllerBase
     {
         private readonly ILogger<AuthController> _logger;
+        /// <summary>
+        /// Builder
+        /// </summary>
+        /// <param name="logger"></param>
         public AuthController(ILogger<AuthController> logger)
         {
             _logger = logger;

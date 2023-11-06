@@ -7,15 +7,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{087CD3F0-B6E
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{E5A7FCC4-703A-4282-A4C7-BBD258EC1388}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\Application.csproj", "{F06BDEC7-9831-4353-A2D6-75AD542496BB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Application\Application.csproj", "{F06BDEC7-9831-4353-A2D6-75AD542496BB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{9222120B-D6E5-4467-89C5-176E4A4481A3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csproj", "{9222120B-D6E5-4467-89C5-176E4A4481A3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{6A899CF1-AA48-4730-ABD0-B47E11DD6893}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{6A899CF1-AA48-4730-ABD0-B47E11DD6893}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MauRealEstateCompany.Api", "MauRealEstateCompany.Api\MauRealEstateCompany.Api.csproj", "{A8F36767-2534-4D1B-9A09-4E9637BB7354}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MauRealEstateCompany.Api", "MauRealEstateCompany.Api\MauRealEstateCompany.Api.csproj", "{A8F36767-2534-4D1B-9A09-4E9637BB7354}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MauRealEstateCompany.ApiTest", "MauRealEstateCompany.ApiTest\MauRealEstateCompany.ApiTest.csproj", "{FF1D67E2-C1A0-4829-88FA-E3CFC04BC7C2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MauRealEstateCompany.ApplicationTest", "MauRealEstateCompany.ApiTest\MauRealEstateCompany.ApplicationTest.csproj", "{FF1D67E2-C1A0-4829-88FA-E3CFC04BC7C2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
