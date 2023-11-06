@@ -16,6 +16,7 @@ using Application.Auth.Login;
 using Infrastructure.Auth;
 using Domain.Owners;
 using Infrastructure.Repositories.OwnersRepository;
+using Infrastructure.FileManager;
 
 namespace Infrastructure
 {
@@ -31,6 +32,8 @@ namespace Infrastructure
             services.AddScoped<IApplicationDbContext>(provider => provider.GetRequiredService<ApplicationDbContext>());
 
             services.AddScoped<IAuthService, AuthService>();
+
+            services.AddScoped<IPropertyFileManager, PropertyFileManager>();
 
             services.AddTransient(typeof(ICommandRepository<>), typeof(CommandRepository<>));
             services.AddTransient(typeof(IQueryRepository<>), typeof(QueryRepository<>));

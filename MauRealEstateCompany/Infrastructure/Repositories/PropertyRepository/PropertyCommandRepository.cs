@@ -18,11 +18,13 @@ namespace Infrastructure.Repositories.PropertyRepository
             _commandRepository = commandRepository;
         }
 
+        /// <inheritdoc/>
         public async Task<Property> CreateAsync(Property property)
         {
             return await _commandRepository.Add(property);
         }
 
+        /// <inheritdoc/>
         public async Task<Property> UpdateAsync(Property property)
         {
             return await _commandRepository.Update(property);

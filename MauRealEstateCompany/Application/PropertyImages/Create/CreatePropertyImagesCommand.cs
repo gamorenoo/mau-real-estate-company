@@ -24,15 +24,17 @@ namespace Application.PropertyImages.Create
     public class CreatePropertyImagesCommandHandler : IRequestHandler<CreatePropertyImagesCommand, PropertyImage>
     {
         private readonly IPropertyImageCommandRepository _propertyImageCommandRepository;
+        private readonly IPropertyFileManager _propertyFileManager;
 
-        public CreatePropertyImagesCommandHandler(IPropertyImageCommandRepository propertyImageCommandRepository)
+        public CreatePropertyImagesCommandHandler(IPropertyImageCommandRepository propertyImageCommandRepository, IPropertyFileManager propertyFileManager)
         {
             _propertyImageCommandRepository = propertyImageCommandRepository;
+            _propertyFileManager = propertyFileManager;
         }
 
         public async Task<PropertyImage> Handle(CreatePropertyImagesCommand request, CancellationToken cancellationToken)
         {
-            string imagePath = SaveImageInServer(request.PropertyImage.ImageFile, request.PathToSaveImage, request.PropertyImage.IdProperty);
+            string imagePath = _propertyFileManager.SaveImageInServer(request.PropertyImage.ImageFile, request.PathToSaveImage, request.PropertyImage.IdProperty);
             PropertyImage propertyImage = new PropertyImage()
             {
                 IdProperty = request.PropertyImage.IdProperty,
@@ -41,29 +43,6 @@ namespace Application.PropertyImages.Create
             };
 
             return await _propertyImageCommandRepository.CreateAsync(propertyImage);
-        }
-
-        private string SaveImageInServer(IFormFile formFile, string path, int IdProperty) {
-            string pathImage = Path.Combine(path, IdProperty.ToString());
-
-            if (!Directory.Exists(pathImage))
-            { 
-                Directory.CreateDirectory(pathImage);
-            }
-
-            pathImage = Path.Combine(pathImage, formFile.FileName);
-
-            if (!Directory.Exists(path))
-            {
-                Directory.CreateDirectory(path);
-            }
-
-            using (var stream = new FileStream(pathImage, FileMode.Create))
-            { 
-                formFile.CopyTo(stream);
-            }
-            
-            return pathImage;
         }
     }
 }

@@ -17,6 +17,7 @@ namespace Infrastructure.Repositories.PropertyImageRepository
             _commandRepository = commandRepository;
         }
 
+        /// <inheritdoc/>
         public async Task<PropertyImage> CreateAsync(PropertyImage propertyImage)
         {
             return await _commandRepository.Add(propertyImage);

@@ -17,16 +17,19 @@ namespace Infrastructure.Repositories.AddressRepository
             _commandRepository = commandRepository;
         }
 
+        /// <inheritdoc/>
         public async Task<Address> CreateAsync(Address address)
         {
             return await _commandRepository.Add(address);
         }
 
+        /// <inheritdoc/>
         public async Task<Address> UpdateAsync(Address address)
         {
             return await _commandRepository.Update(address);
         }
 
+        /// <inheritdoc/>
         public async Task<int> DeleteAasync(Address address)
         {
             return await _commandRepository.Delete(address);

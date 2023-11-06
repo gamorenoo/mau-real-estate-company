@@ -11,12 +11,13 @@ namespace Infrastructure.Repositories.OwnersRepository
     public class OwnerQueryRepository: IOwnerQueryRepository
     {
         private readonly IQueryRepository<Owner> _queryyRepository;
-
+        
         public OwnerQueryRepository(IQueryRepository<Owner> queryyRepository)
         {
             _queryyRepository = queryyRepository;
         }
 
+        /// <inheritdoc/>
         public async Task<Owner?> GetByIdAsync(int idOwner)
         {
             return await _queryyRepository.Get(x => x.IdOwner == idOwner);

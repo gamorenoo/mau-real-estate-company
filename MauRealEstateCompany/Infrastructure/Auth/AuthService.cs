@@ -20,12 +20,14 @@ namespace Infrastructure.Auth
             _configuration = configuration;
         }
 
+        /// <inheritdoc/>
         public bool Login(string username, string password)
         {
             var userIdValid = username.Equals("gustavoamoreno@outlook.com") && password.Equals("0123456789");
             return userIdValid;
         }
 
+        /// <inheritdoc/>
         public string GetToken(string username)
         {
             string token = string.Empty;
