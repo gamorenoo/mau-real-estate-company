@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Application.Common.Mappings;
+using Domain.Addresses;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Addresses.Create
 {
-    public class AddressDto
+    public class AddressDto : IMapFrom<Address>
     {
         [Required]
         public string Street { get; set; }
