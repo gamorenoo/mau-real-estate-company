@@ -1,5 +1,6 @@
 ﻿using Application.Common.Exceptions;
 using Application.Properties.Create;
+using AutoMapper;
 using Domain.Properties;
 using MediatR;
 using System;
@@ -10,24 +11,27 @@ using System.Threading.Tasks;
 
 namespace Application.Properties.ChangePrice
 {
-    public class ChangePricePrpertyCommand : IRequest<Property>
+    public class ChangePricePrpertyCommand : IRequest<PropertyOutDto>
     {
         public PropertyPriceDto PropertyPrice { get; set; }
     }
 
-    public class ChangePricePrpertyCommandHandler : IRequestHandler<ChangePricePrpertyCommand, Property>
+    public class ChangePricePrpertyCommandHandler : IRequestHandler<ChangePricePrpertyCommand, PropertyOutDto>
     {
         private readonly IPropertyCommandRepository _propertyCommandRepository;
         private readonly IPropertyQueryRepository _propertyQueryRepository;
+        private readonly IMapper _mapper;
 
         public ChangePricePrpertyCommandHandler(IPropertyCommandRepository propertyCommandRepository
-            , IPropertyQueryRepository propertyQueryRepository)
+            , IPropertyQueryRepository propertyQueryRepository
+            , IMapper mapper)
         {
+            _mapper = mapper;
             _propertyCommandRepository = propertyCommandRepository;
             _propertyQueryRepository = propertyQueryRepository;
         }
 
-        public async Task<Property> Handle(ChangePricePrpertyCommand request, CancellationToken cancellationToken)
+        public async Task<PropertyOutDto> Handle(ChangePricePrpertyCommand request, CancellationToken cancellationToken)
         {
             Property? property = await _propertyQueryRepository.GetByIdAsync(request.PropertyPrice.IdProperty);
 
@@ -40,7 +44,7 @@ namespace Application.Properties.ChangePrice
 
             property = await _propertyCommandRepository.UpdateAsync(property);
 
-            return property;
+            return _mapper.Map<PropertyOutDto>(property);
         }
     }
 

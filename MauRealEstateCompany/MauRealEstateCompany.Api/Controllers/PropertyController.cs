@@ -50,7 +50,7 @@ namespace MauRealEstateCompany.Api.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        public async Task<ActionResult<Property>> Create([FromForm] CreatePropertyCommnad createPropertyCommnad)
+        public async Task<ActionResult<PropertyOutDto>> Create([FromForm] CreatePropertyCommnad createPropertyCommnad)
         {
             return await Mediator.Send(createPropertyCommnad);
         }
@@ -81,7 +81,7 @@ namespace MauRealEstateCompany.Api.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        public async Task<ActionResult<Property>> Update([FromForm] UpdatePropertyCommnad updatePropertyCommnad)
+        public async Task<ActionResult<PropertyOutDto>> Update([FromForm] UpdatePropertyCommnad updatePropertyCommnad)
         {
             return await Mediator.Send(updatePropertyCommnad);
         }
@@ -103,7 +103,7 @@ namespace MauRealEstateCompany.Api.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        public async Task<ActionResult<Property>> Patch([FromForm] ChangePricePrpertyCommand changePricePrpertyCommand)
+        public async Task<ActionResult<PropertyOutDto>> Patch([FromForm] ChangePricePrpertyCommand changePricePrpertyCommand)
         {
             return await Mediator.Send(changePricePrpertyCommand);
         }
@@ -133,7 +133,7 @@ namespace MauRealEstateCompany.Api.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        public async Task<ActionResult<IEnumerable<Property>>> GetWithFilters([FromForm] ListWithFiltersQuery listWithFiltersQuery)
+        public async Task<ActionResult<IEnumerable<PropertyOutDto>>> GetWithFilters([FromForm] ListWithFiltersQuery listWithFiltersQuery)
         {
             var properties = await Mediator.Send(listWithFiltersQuery);
 

@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Application.Common.Mappings;
+using Domain.Owners;
 
 namespace Application.Owners.Create
 {
-    internal class OwnerDto
+    public class OwnerDto : IMapFrom<Owner>
     {
         public string Name { get; set; }
         public string Photo { get; set; }

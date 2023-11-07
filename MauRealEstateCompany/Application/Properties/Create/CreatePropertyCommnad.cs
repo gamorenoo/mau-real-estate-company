@@ -1,5 +1,6 @@
 ﻿using Application.Addresses.Create;
 using Application.Common.Exceptions;
+using AutoMapper;
 using Domain.Owners;
 using Domain.Properties;
 using MediatR;
@@ -11,28 +12,32 @@ using System.Threading.Tasks;
 
 namespace Application.Properties.Create
 {
-    public class CreatePropertyCommnad: IRequest<Property>
+    public class CreatePropertyCommnad: IRequest<PropertyOutDto>
     {
         public PropertyDto Property { get; set; }
     }
 
 
-    public class CreatePropertyCommnadHandler : IRequestHandler<CreatePropertyCommnad, Property>
+    public class CreatePropertyCommnadHandler : IRequestHandler<CreatePropertyCommnad, PropertyOutDto>
     {
         private readonly IPropertyCommandRepository _propertyRepository;
         private readonly IOwnerQueryRepository _ownerQueryRepository;
         private readonly MediatR.ISender _sender;
+        private readonly IMapper _mapper;
+
 
         public CreatePropertyCommnadHandler(MediatR.ISender sender
             , IPropertyCommandRepository propertyRepository
-            , IOwnerQueryRepository ownerQueryRepository)
+            , IOwnerQueryRepository ownerQueryRepository
+            , IMapper mapper)
         {
+            _mapper = mapper;
             _sender = sender;
             _propertyRepository = propertyRepository;
             _ownerQueryRepository = ownerQueryRepository;
         }
 
-        public async Task<Property> Handle(CreatePropertyCommnad request, CancellationToken cancellationToken)
+        public async Task<PropertyOutDto> Handle(CreatePropertyCommnad request, CancellationToken cancellationToken)
         {
             var owner = await _ownerQueryRepository.GetByIdAsync(request.Property.IdOwner);
             if (owner == null)
@@ -58,7 +63,7 @@ namespace Application.Properties.Create
 
             await _sender.Send(commandAddres);
 
-            return property;
+            return _mapper.Map<PropertyOutDto>(property);
         }
     }
 }
